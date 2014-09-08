@@ -52,6 +52,11 @@ describe Stancer do
       issue['indicators'][1]['motion_id'].must_equal "2009-f10/b3"
     end
 
+    it "should embed votes into motions" do
+      issue['indicators'][0]['motion']['id'].must_equal "2012-76/a"
+      issue['indicators'][0]['motion']['vote_events'][0]['votes'].find { |v| v['voter_id'] == 'alfred_adams' }['option'].must_equal "yes"
+    end
+
   end
 
 end 

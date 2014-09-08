@@ -8,7 +8,7 @@ class Stancer
   end
 
   def all_issues
-    @_issues = issues_with_embedded_motions
+    @_issues = issues_with_embedded_data
   end
 
   private
@@ -20,24 +20,19 @@ class Stancer
     (@_data ||= {})[type] ||= SourceLoader.new(source(type)).data
   end
 
-  def issues_with_embedded_indicators
-    issues = source_data(:issues)
+  def issues_with_embedded_data
+    issues     = source_data(:issues)
     indicators = source_data(:indicators)
-    issues.each do |iss| 
-      iss['indicators'] ||= indicators.find { |ind| iss['id'] == ind['issue'] }['indicators'] 
-    end
-    return issues
-  end
+    motions    = source_data(:motions)  
+    votes      = source_data(:votes)  
 
-  def issues_with_embedded_motions
-    issues = issues_with_embedded_indicators
-    motions = source_data(:motions)  # or might be included elsewhere...
     issues.each do |iss|
+      iss['indicators'] ||= indicators.find { |ind| iss['id'] == ind['issue'] }['indicators'] 
       iss['indicators'].each do |ind|
-        ind['motion'] ||= motions.find { |m| 
-          # warn "Checking #{m['id']} against #{ind['motion_id']} : #{m['id'] == ind['motion_id']}"
-          m['id'] == ind['motion_id'] 
-        } 
+        ind['motion'] ||= motions.find { |m| m['id'] == ind['motion_id'] } || { 'id' => ind['motion_id'] }
+        ind['motion']['vote_events'] ||= [{
+          "votes" => [votes.find { |v| v['motion_id'] == ind['motion']['id'] }]
+        }]
       end
     end
     return issues
