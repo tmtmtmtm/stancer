@@ -2,5 +2,25 @@
   {
     "id": 2,
     "text": "Farming Subsidies"
+  },
+  {
+    "id": 3,
+    "text": "Hate Speech",
+    "indicators": [
+      {
+        "motion_id": "2012-76/a",
+        "weights": {
+          "yes": 5,
+          "no": 0
+        }
+      },
+      {
+        "motion_id": "2009-f10/b3",
+        "weights": {
+          "yes": 0,
+          "no": 10
+        }
+      }
+    ]
   }
 ]
