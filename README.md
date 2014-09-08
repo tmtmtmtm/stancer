@@ -87,6 +87,9 @@ field.
   `weights`, or the Stancer must be configured to generate the `weights`
   from whatever other fields are provided.
 
+  The Indicator records themselves may be sourced separately, but will
+  usually be contained within the Issues file.
+
 4. Motion Data (official + unofficial)
 
   It’s important that you don’t simply make large claims like “Joe Smith

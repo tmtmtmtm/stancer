@@ -16,12 +16,20 @@ describe Stancer do
     )
   }
 
+  let(:issue) { subject.all_issues.find { |i| i['id'] == 2 } }
+
   it "should instantiate" do
     subject.class.must_equal Stancer
   end
 
   it "should be able to read files" do
-    subject.source_data(:issues).first['id'].must_equal 2
+    issue['text'].must_equal 'Farming Subsidies'
+  end
+
+  it "should embed indicators into issues" do
+    issue['indicators'].wont_be_nil
+    issue['indicators'].count.must_equal 2
+    issue['indicators'][0]['motion_id'].must_equal "2014-139/b"
   end
 
 end 

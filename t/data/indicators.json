@@ -1,0 +1,21 @@
+[
+  {
+    "issue": 2,
+    "indicators": [
+      {
+        "motion_id": "2014-139/b",
+        "weights": {
+          "yes": 10,
+          "no": 0
+        }
+      },
+      {
+        "motion_id": "2013-138/a2",
+        "weights": {
+          "yes": 0,
+          "no": 5
+        }
+      }
+    ]
+  }
+]
