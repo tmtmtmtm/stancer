@@ -1,11 +1,12 @@
 [
   {
     "id": 2,
-    "text": "Farming Subsidies"
+    "title": "Farming Subsidies",
+    "description": "abolishing subsidies for farmers"
   },
   {
     "id": 3,
-    "text": "Hate Speech",
+    "title": "Hate Speech",
     "indicators": [
       {
         "motion_id": "2012-76/a",

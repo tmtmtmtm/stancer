@@ -8,7 +8,7 @@ class Stancer
   end
 
   def all_issues
-    @_issues = issues_injected_with_indicators
+    @_issues = issues_with_embedded_motions
   end
 
   private
@@ -20,11 +20,27 @@ class Stancer
     (@_data ||= {})[type] ||= SourceLoader.new(source(type)).data
   end
 
-  def issues_injected_with_indicators
+  def issues_with_embedded_indicators
     issues = source_data(:issues)
     indicators = source_data(:indicators)
-    issues.each { |iss| iss['indicators'] ||= indicators.find { |ind| iss['id'] == ind['issue'] }['indicators'] }
-    issues
+    issues.each do |iss| 
+      iss['indicators'] ||= indicators.find { |ind| iss['id'] == ind['issue'] }['indicators'] 
+    end
+    return issues
+  end
+
+  def issues_with_embedded_motions
+    issues = issues_with_embedded_indicators
+    motions = source_data(:motions)  # or might be included elsewhere...
+    issues.each do |iss|
+      iss['indicators'].each do |ind|
+        ind['motion'] ||= motions.find { |m| 
+          # warn "Checking #{m['id']} against #{ind['motion_id']} : #{m['id'] == ind['motion_id']}"
+          m['id'] == ind['motion_id'] 
+        } 
+      end
+    end
+    return issues
   end
 
 

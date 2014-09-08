@@ -1,0 +1,58 @@
+[
+  {
+    "id": "2014-139/b",
+    "text": "Abolish all farming subsidies",
+    "date": "2014-03-04",
+    "result": "failed",
+    "vote_events": [
+      {
+        "votes": [
+          {
+            "voter": {
+              "id": "alfred_adams",
+              "name": "Alfred Adams"
+            },
+            "option": "no",
+            "party_id": "pa"
+          },
+          {
+            "voter": {
+              "name": "Barry Barnes",
+              "id": "barry_barnes"
+            },
+            "option": "yes",
+            "party_id": "pb"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "2013-138/a2",
+    "text": "Exempt the Royal Family from farming subsidies",
+    "result": "passed",
+    "vote_events": [
+      {
+        "start_date": "2013-03-04T16:27:00+00:00",
+        "votes": [
+          {
+            "voter": {
+              "id": "alfred_adams",
+              "name": "Alfred Adams"
+            },
+            "option": "yes",
+            "party_id": "pa"
+          },
+          {
+            "voter": {
+              "name": "Barry Barnes",
+              "id": "barry_barnes"
+            },
+            "option": "yes",
+            "party_id": "pb"
+          }
+        ]
+      }
+    ]
+  }
+]
