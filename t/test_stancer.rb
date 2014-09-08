@@ -37,6 +37,7 @@ describe Stancer do
     it "should embed motions into issues" do
       issue['indicators'][0]['motion']['id'].must_equal "2014-139/b"
       issue['indicators'][0]['motion']['text'].must_equal "Abolish all farming subsidies"
+      issue['indicators'][0]['motion']['vote_events'][0]['votes'].find { |v| v['voter']['id'] == 'alfred_adams' }['option'].must_equal "no"
     end
 
   end
