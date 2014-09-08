@@ -20,8 +20,8 @@ describe Stancer do
     subject.class.must_equal Stancer
   end
 
-  it "should know where to find files" do
-    subject.source(:votes).must_equal 't/data/votes.json'
+  it "should be able to read files" do
+    subject.source_data(:issues).first['id'].must_equal 2
   end
 
 end 
