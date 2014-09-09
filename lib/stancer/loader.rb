@@ -5,6 +5,7 @@ class Stancer::SourceLoader
 
   def initialize(source)
     @source = source
+    @_data = [] unless @source
   end
 
   # For now we can only read json files

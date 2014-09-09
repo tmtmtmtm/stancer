@@ -99,6 +99,41 @@ describe Stancer do
 
   end
 
+  # all stances
+
+  describe "All stances (Party)" do
+
+    let(:allstances) { subject.all_stances('group') }
+
+    it "all_stances gives us an Array" do
+      allstances.class.must_equal Array
+    end
+
+    it "should have one Hash per Issue" do
+      allstances.count.must_equal 2
+      allstances.first.class.must_equal Hash
+    end
+
+    it "should score Issue 2 correctly" do
+      farming = allstances.find { |s| s['id'] == 2 }['stances']
+      farming['pa'][:weight].must_equal 0
+      farming['pb'][:weight].must_equal 10.fdiv(15)
+    end
+
+  end
+
+  describe "All stances (MP)" do
+
+    let(:allstances) { subject.all_stances('voter') }
+
+    it "should score Issue 2 correctly" do
+      farming = allstances.find { |s| s['id'] == 2 }['stances']
+      farming['alfred_adams'][:weight].must_equal 0
+      farming['barry_barnes'][:weight].must_equal 10.fdiv(15)
+    end
+
+  end
+
   # Tests for underlying data structures 
   
   describe "separate indicators" do

@@ -9,6 +9,13 @@ class Stancer
     @sources = h[:sources]
   end
 
+  def all_stances(group='voter')
+    all_issues.map { |i| 
+      i['stances'] = issue_stance(i, group).to_h
+      i
+    }
+  end
+
   def issue_stance(i, group='voter')
     Stance.new(i, group)
   end
@@ -19,7 +26,7 @@ class Stancer
 
   private
   def source(type)
-    @sources[type] or raise "No source for #{type}"
+    @sources[type] 
   end
 
   def source_data(type)
@@ -27,13 +34,13 @@ class Stancer
   end
 
   def issues_with_embedded_data
-    issues     = source_data(:issues)
-    indicators = source_data(:indicators)
-    motions    = source_data(:motions)  
-    votes      = source_data(:votes)  
+    issues     = source_data(:issues) or raise "Need a source of isses"
+    indicators = source_data(:indicators) || []
+    motions    = source_data(:motions) || []
+    votes      = source_data(:votes) || []
 
     issues.each do |iss|
-      iss['indicators'] ||= indicators.find { |ind| iss['id'] == ind['issue'] }['indicators'] 
+      iss['indicators'] ||= (indicators.find { |ind| iss['id'] == ind['issue'] } or raise "No indicators for #{iss['id']}")['indicators'] 
       iss['indicators'].each do |ind|
         ind['motion'] ||= motions.find { |m| m['id'] == ind['motion_id'] } || { 'id' => ind['motion_id'] }
         ind['motion']['vote_events'] ||= [{

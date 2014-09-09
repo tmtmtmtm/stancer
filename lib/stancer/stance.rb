@@ -35,7 +35,7 @@ class Stancer::Stance
     @indicators.each do |a|
       a['motion']['vote_events'].each do |ve|
         wanted_votes = @filter.nil? ? ve['votes'] : ve['votes'].find_all(&@filter) 
-        wanted_votes.group_by { |v|
+        wanted_votes.compact.group_by { |v|
           # Group by the first potential key that exists (e.g. mp or mp_id)
           # There must be a more rubyish way of doing this. 
           bloc = v[@groups.find { |g| v.key?(g) }]
