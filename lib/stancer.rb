@@ -1,4 +1,5 @@
 require "stancer/version"
+require "stancer/loader"
 require 'colorize'
 
 class Stancer
@@ -36,22 +37,6 @@ class Stancer
       end
     end
     return issues
-  end
-
-
-
-  class SourceLoader
-
-    require 'json'
-
-    def initialize(source)
-      @source = source
-    end
-
-    # For now we can only read json files
-    def data
-      @_data ||= JSON.parse(open(@source).read)
-    end
   end
 
 end
