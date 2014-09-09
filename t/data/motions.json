@@ -13,7 +13,7 @@
               "name": "Alfred Adams"
             },
             "option": "no",
-            "party_id": "pa"
+            "group_id": "pa"
           },
           {
             "voter": {
@@ -21,7 +21,7 @@
               "id": "barry_barnes"
             },
             "option": "yes",
-            "party_id": "pb"
+            "group_id": "pb"
           }
         ]
       }
@@ -41,7 +41,7 @@
               "name": "Alfred Adams"
             },
             "option": "yes",
-            "party_id": "pa"
+            "group_id": "pa"
           },
           {
             "voter": {
@@ -49,7 +49,7 @@
               "id": "barry_barnes"
             },
             "option": "yes",
-            "party_id": "pb"
+            "group_id": "pb"
           }
         ]
       }
