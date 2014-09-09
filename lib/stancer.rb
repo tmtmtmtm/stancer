@@ -9,8 +9,8 @@ class Stancer
     @sources = h[:sources]
   end
 
-  def issue_stance(i)
-    Stance.new(i, 'voter')
+  def issue_stance(i, group='voter')
+    Stance.new(i, group)
   end
 
   def all_issues

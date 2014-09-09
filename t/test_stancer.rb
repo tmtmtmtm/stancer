@@ -16,9 +16,9 @@ describe Stancer do
     )
   }
 
-  # Stancing
+  # Person Stancing
 
-  describe Stancer::Stance do
+  describe "MP Stance" do
 
     let(:issue) { subject.all_issues.find { |i| i['id'] == 2 } }
     let(:stance) { subject.issue_stance(issue) }
@@ -52,6 +52,49 @@ describe Stancer do
       v[:score].must_equal 10
       v[:max].must_equal 15
       v[:weight].must_equal 10.fdiv(15)
+    end
+
+  end
+
+  # Party/Group stancing
+
+  describe "Group Stance" do
+
+    let(:issue) { subject.all_issues.find { |i| i['id'] == 2 } }
+    let(:stance) { subject.issue_stance(issue, 'group') }
+
+    it "should have a Stance" do
+      stance.class.must_equal Stancer::Stance
+    end
+
+    it "should have one entry per party" do
+      h = stance.to_h
+      h.keys.sort.must_equal ['pa', 'pb']
+    end
+
+    it "should have underlying vote data correct" do
+      pa = stance.to_h['pa'] 
+      pb = stance.to_h['pb'] 
+      pa[:num_votes].must_equal 2
+      pa[:num_motions].must_equal 2
+      pa[:counts].find { |c| c[:option] == 'no' }[:value].must_equal 1
+      pa[:counts].find { |c| c[:option] == 'yes' }[:value].must_equal 1
+      pb[:counts].find { |c| c[:option] == 'no' }.must_be_nil
+      pb[:counts].find { |c| c[:option] == 'yes' }[:value].must_equal 2
+    end
+
+    it "should score Party A correctly" do
+      st = stance.to_h['pa'] 
+      st[:score].must_equal 0
+      st[:max].must_equal 15
+      st[:weight].must_equal 0.fdiv(15)
+    end
+
+    it "should score Party B correctly" do
+      st = stance.to_h['pb'] 
+      st[:score].must_equal 10
+      st[:max].must_equal 15
+      st[:weight].must_equal 10.fdiv(15)
     end
 
   end

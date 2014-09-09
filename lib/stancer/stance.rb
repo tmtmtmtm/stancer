@@ -38,7 +38,7 @@ class Stancer::Stance
         wanted_votes.group_by { |v|
           # Group by the first potential key that exists (e.g. mp or mp_id)
           # There must be a more rubyish way of doing this. 
-          bloc = v[@groups.first { |g| v.key?(g) }]
+          bloc = v[@groups.find { |g| v.key?(g) }]
           # Then collapse records to ID as other hash values may differ for
           # different votes (e.g. the MP's party)
           key = bloc.is_a?(Hash) ? bloc['id'] : bloc
