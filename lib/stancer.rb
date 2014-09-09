@@ -40,7 +40,7 @@ class Stancer
     votes      = source_data(:votes) || []
 
     issues.each do |iss|
-      iss['indicators'] ||= (indicators.find { |ind| iss['id'] == ind['issue'] } or raise "No indicators for #{iss['id']}")['indicators'] 
+      iss['indicators'] ||= (indicators.find { |ind| iss['id'] == ind['issue_id'] } or raise "No indicators for #{iss['id']}")['indicators'] 
       iss['indicators'].each do |ind|
         ind['motion'] ||= motions.find { |m| m['id'] == ind['motion_id'] } || { 'id' => ind['motion_id'] }
         ind['motion']['vote_events'] ||= [{
