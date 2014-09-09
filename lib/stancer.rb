@@ -1,11 +1,16 @@
 require "stancer/version"
 require "stancer/loader"
+require "stancer/stance"
 require 'colorize'
 
 class Stancer
   
   def initialize(h)
     @sources = h[:sources]
+  end
+
+  def issue_stance(i)
+    Stance.new(i, 'voter')
   end
 
   def all_issues

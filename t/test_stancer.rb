@@ -16,7 +16,48 @@ describe Stancer do
     )
   }
 
+  # Stancing
 
+  describe Stancer::Stance do
+
+    let(:issue) { subject.all_issues.find { |i| i['id'] == 2 } }
+    let(:stance) { subject.issue_stance(issue) }
+
+    it "should have a Stance" do
+      stance.class.must_equal Stancer::Stance
+    end
+
+    it "should have one entry per MP" do
+      h = stance.to_h
+      h.keys.sort.must_equal ['alfred_adams', 'barry_barnes']
+    end
+
+    it "should have underlying vote data correct" do
+      aa = stance.to_h['alfred_adams'] 
+      aa[:num_votes].must_equal 2
+      aa[:num_motions].must_equal 2
+      aa[:counts].find { |c| c[:option] == 'no' }[:value].must_equal 1
+      aa[:counts].find { |c| c[:option] == 'yes' }[:value].must_equal 1
+    end
+
+    it "should score Adams correctly" do
+      v = stance.to_h['alfred_adams'] 
+      v[:score].must_equal 0
+      v[:max].must_equal 15
+      v[:weight].must_equal 0.fdiv(15)
+    end
+
+    it "should score Barnes correctly" do
+      v = stance.to_h['barry_barnes'] 
+      v[:score].must_equal 10
+      v[:max].must_equal 15
+      v[:weight].must_equal 10.fdiv(15)
+    end
+
+  end
+
+  # Tests for underlying data structures 
+  
   describe "separate indicators" do
 
     let(:issue) { subject.all_issues.find { |i| i['id'] == 2 } }
@@ -58,6 +99,7 @@ describe Stancer do
     end
 
   end
+
 
 end 
 
