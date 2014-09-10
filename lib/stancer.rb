@@ -7,12 +7,13 @@ class Stancer
   
   def initialize(h)
     @sources = h[:sources]
-    @options = h[:options]
+    @options = h[:options] || {}
   end
 
   def all_stances(group=opt(:grouping))
     all_issues.map { |i| 
       i['stances'] = issue_stance(i, group).to_h
+      [opt(:exclude)].flatten.each { |k| i.delete(k) }
       i
     }
   end

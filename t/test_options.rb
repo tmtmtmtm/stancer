@@ -51,3 +51,27 @@ describe 'Party grouping' do
 
 end 
 
+describe 'exclusions' do
+
+  subject { 
+    Stancer.new({
+      sources: {
+        votes:      't/data/votes.json',
+        issues:     't/data/issues.json',
+        indicators: 't/data/indicators.json',
+        motions:    't/data/motions.json',
+      },
+      options: { 
+        grouping:   'group',
+        exclude:    'indicators',
+      }
+    })
+  }
+
+  it "should score Issue 2 correctly" do
+    farming = subject.all_stances.find { |s| s['id'] == 2 }
+    farming['indicators'].must_be_nil 
+  end
+
+end 
+
