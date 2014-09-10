@@ -142,10 +142,10 @@ Or install it yourself as:
 
   require 'stancer'
 
-  stancer = Stancer.new(
+  stancer = Stancer.new({
     sources: { ... },
     options: { ... },
-  )
+  })
 
   stancer.all_stances.each { |s| ... }
   ```
