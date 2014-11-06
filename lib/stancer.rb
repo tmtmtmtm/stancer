@@ -1,7 +1,6 @@
 require "stancer/version"
 require "stancer/loader"
 require "stancer/stance"
-require 'colorize'
 
 class Stancer
   
