@@ -1,5 +1,4 @@
 class Stancer::Stance
-  require 'json'
 
   def initialize(i, group, filter=nil)
     # options?
