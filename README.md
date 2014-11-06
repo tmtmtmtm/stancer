@@ -48,13 +48,15 @@ Note: Where the documentaion says something like "must contain `voter_id`", a
 
   The actual data that says things like “Joe Smith voted Yes on Motion 134/b/2”
 
-  These should be in [Popolo Vote format](http://www.popoloproject.com/specs/motion.html).
+  This can either be in a 'motions' file with embedded votes (all in
+  [Popolo Vote format](http://www.popoloproject.com/specs/motion.html)),
+  or separate 'motions' and 'votes' files of flat JSON.
 
   How you get this data is out of scope for here: talk to a local
   [Parliamentary Monitoring Organisation](http://en.wikipedia.org/wiki/Parliamentary_informatics)
   if you're having difficulty (or contact me if you're really stuck).
 
-  Example: [t/data/motions.json](t/data/motions.json)
+  Example: [t/data/motions.json](t/data/motions.json) + [t/data/votes.json](t/data/votes.json) 
 
 2. Issues (required)
 
@@ -96,7 +98,7 @@ Note: Where the documentaion says something like "must contain `voter_id`", a
   The Indicator records themselves may be sourced separately, but will
   usually be contained within the Issues file.
 
-  Example: [t/data/issues.json](t/data/issues.json)
+  Example: [t/data/indicators.json](t/data/indicators.json)
 
 4. Vote Descriptions (optional)
 
@@ -117,6 +119,8 @@ Note: Where the documentaion says something like "must contain `voter_id`", a
   These can either be a human-readable title for the motion, or an 'aye'
   and 'nay' pairing to provide different text depending on which way a
   vote was cast.
+
+  Example: *not yet implemented*
 
 ## Installation
 
