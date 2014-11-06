@@ -29,7 +29,7 @@ describe Stancer do
 
     it "should have one entry per MP" do
       h = stance.to_h
-      h.keys.sort.must_equal ['alfred_adams', 'barry_barnes']
+      h.keys.sort.must_equal ['alfred_adams', 'barry_barnes', 'celia_cairns']
     end
 
     it "should have underlying vote data correct" do
@@ -75,9 +75,9 @@ describe Stancer do
     it "should have underlying vote data correct" do
       pa = stance.to_h['pa'] 
       pb = stance.to_h['pb'] 
-      pa[:num_votes].must_equal 2
-      pa[:num_motions].must_equal 2
-      pa[:counts].find { |c| c[:option] == 'no' }[:value].must_equal 1
+      pa[:num_votes].must_equal 4
+      pa[:num_motions].must_equal 4
+      pa[:counts].find { |c| c[:option] == 'no' }[:value].must_equal 3
       pa[:counts].find { |c| c[:option] == 'yes' }[:value].must_equal 1
       pb[:counts].find { |c| c[:option] == 'no' }.must_be_nil
       pb[:counts].find { |c| c[:option] == 'yes' }[:value].must_equal 2
@@ -85,9 +85,9 @@ describe Stancer do
 
     it "should score Party A correctly" do
       st = stance.to_h['pa'] 
-      st[:score].must_equal 0
-      st[:max].must_equal 15
-      st[:weight].must_equal 0.fdiv(15)
+      st[:score].must_equal 5
+      st[:max].must_equal 30
+      st[:weight].must_equal 5.fdiv(30)
     end
 
     it "should score Party B correctly" do
@@ -116,7 +116,7 @@ describe Stancer do
 
     it "should score Issue 2 correctly" do
       farming = allstances.find { |s| s['id'] == 2 }['stances']
-      farming['pa'][:weight].must_equal 0
+      farming['pa'][:weight].must_equal 5.fdiv(30)
       farming['pb'][:weight].must_equal 10.fdiv(15)
     end
 

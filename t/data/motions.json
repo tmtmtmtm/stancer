@@ -22,6 +22,14 @@
             },
             "option": "yes",
             "group_id": "pb"
+          },
+          {
+            "voter": {
+              "name": "Celia Cairns",
+              "id": "celia_cairns"
+            },
+            "option": "no",
+            "group_id": "pa"
           }
         ]
       }
@@ -50,6 +58,14 @@
             },
             "option": "yes",
             "group_id": "pb"
+          },
+          {
+            "voter": {
+              "name": "Celia Cairns",
+              "id": "celia_cairns"
+            },
+            "option": "no",
+            "group_id": "pa"
           }
         ]
       }
