@@ -103,7 +103,7 @@ describe Stancer do
 
   describe "All stances (Party)" do
 
-    let(:allstances) { subject.all_stances('group') }
+    let(:allstances) { subject.all_stances(group_by: 'group') }
 
     it "all_stances gives us an Array" do
       allstances.class.must_equal Array
@@ -124,7 +124,7 @@ describe Stancer do
 
   describe "All stances (MP)" do
 
-    let(:allstances) { subject.all_stances('voter') }
+    let(:allstances) { subject.all_stances(group_by: 'voter') }
 
     it "should score Issue 2 correctly" do
       farming = allstances.find { |s| s['id'] == 2 }['stances']

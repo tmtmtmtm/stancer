@@ -12,15 +12,12 @@ describe 'MP grouping' do
         issues:     't/data/issues.json',
         indicators: 't/data/indicators.json',
         motions:    't/data/motions.json',
-      },
-      options: { 
-        grouping:   'voter',
       }
     })
   }
 
   it "should score Issue 2 correctly" do
-    farming = subject.all_stances.find { |s| s['id'] == 2 }['stances']
+    farming = subject.all_stances(group_by: 'voter').find { |s| s['id'] == 2 }['stances']
     farming['barry_barnes'][:weight].must_equal 10.fdiv(15)
     farming['pb'].must_be_nil 
   end
@@ -36,15 +33,12 @@ describe 'Party grouping' do
         issues:     't/data/issues.json',
         indicators: 't/data/indicators.json',
         motions:    't/data/motions.json',
-      },
-      options: { 
-        grouping:   'group',
       }
     })
   }
 
   it "should score Issue 2 correctly" do
-    farming = subject.all_stances.find { |s| s['id'] == 2 }['stances']
+    farming = subject.all_stances(group_by: 'group').find { |s| s['id'] == 2 }['stances']
     farming['barry_barnes'].must_be_nil 
     farming['pb'][:weight].must_equal 10.fdiv(15)
   end
@@ -60,16 +54,15 @@ describe 'exclusions' do
         issues:     't/data/issues.json',
         indicators: 't/data/indicators.json',
         motions:    't/data/motions.json',
-      },
-      options: { 
-        grouping:   'group',
-        exclude:    'indicators',
       }
     })
   }
 
   it "should score Issue 2 correctly" do
-    farming = subject.all_stances.find { |s| s['id'] == 2 }
+    farming = subject.all_stances({
+      group_by:   'group',
+      exclude:    'indicators',
+    }).find { |s| s['id'] == 2 }
     farming['indicators'].must_be_nil 
   end
 

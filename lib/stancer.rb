@@ -7,13 +7,13 @@ class Stancer
   
   def initialize(h)
     @sources = h[:sources]
-    @options = h[:options] || {}
   end
 
-  def all_stances(group=opt(:grouping))
+  def all_stances(opts)
+    group = opts[:group_by] or raise "No group_by"
     all_issues.map { |i| 
       i['stances'] = issue_stance(i, group).to_h
-      [opt(:exclude)].flatten.each { |k| i.delete(k) }
+      [opts[:exclude]].flatten.each { |k| i.delete(k) }
       i
     }
   end
@@ -33,10 +33,6 @@ class Stancer
 
   def source_data(type)
     (@_data ||= {})[type] ||= SourceLoader.new(source(type)).data
-  end
-
-  def opt(k)
-    @options[k]
   end
 
   def issues_with_embedded_data

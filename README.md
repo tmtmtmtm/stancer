@@ -148,10 +148,9 @@ Or install it yourself as:
 
   stancer = Stancer.new({
     sources: { ... },
-    options: { ... },
   })
 
-  stancer.all_stances.each { |s| ... }
+  stancer.all_stances(group_by: 'voter').each { |s| ... }
   ```
 
 ## Contributing
