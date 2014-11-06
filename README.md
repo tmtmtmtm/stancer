@@ -32,28 +32,31 @@ gets you something very useful very quickly.
 
 At the moment we assume that data will either be in local JSON files
 (where appropriate, conforming to the Popolo specifications for Person,
-Organisation, and Vote data), or available over an API that produces
+Organisation, and Vote data), or available over an HTTP API that returns
 JSON (e.g. from Morph.io). 
 
-Pull requests for handling other sources and formats are appreciated. 
+Currently these are required to be 'complete' files (i.e. lists of *all*
+votes, or legislators). Fetching individual records one by one over an
+API is not yet supported (though patches welcome).
 
-When the documetaion says something like "must contain `voter_id`", this
-should also be taken to mean that it has a `voter` with a nested `id`
-field.
+Pull requests for handling other sources and formats are also appreciated. 
 
-1. Vote Events
+Note: Where the documentaion says something like "must contain `voter_id`", a
+`voter` record with a nested `id` field should also work.
+
+1. Vote Data (required)
 
   The actual data that says things like “Joe Smith voted Yes on Motion 134/b/2”
 
-  From this it must be possible to derive a `motion_id`, `voter_id`, and
-  `option`, and ideally also a `group_id` (possibly in conjunction with #5
-  below).
+  These should be in [Popolo Vote format](http://www.popoloproject.com/specs/motion.html).
 
   How you get this data is out of scope for here: talk to a local
   [Parliamentary Monitoring Organisation](http://en.wikipedia.org/wiki/Parliamentary_informatics)
   if you're having difficulty (or contact me if you're really stuck).
 
-2. Issues
+  Example: [t/data/motions.json](t/data/motions.json)
+
+2. Issues (required)
 
   These are topic areas that usually involve more than one vote. For
   example, in the UK, there have been at least ten different motions
@@ -66,7 +69,9 @@ field.
   You can largely have whatever fields you like here, depending on how
   you're going to display them. The only essential field is `id`.
 
-3. Indicators
+  Example: [t/data/issues.json](t/data/issues.json)
+
+3. Indicators (required)
 
   An Indicator is something that contributes to a Stance (e.g. Joe Smith
   voting Yes on 134/b/2 strongly indicates that he is against Increased
@@ -90,7 +95,9 @@ field.
   The Indicator records themselves may be sourced separately, but will
   usually be contained within the Issues file.
 
-4. Motion Data (official + unofficial)
+  Example: [t/data/issues.json](t/data/issues.json)
+
+4. Vote Descriptions (optional)
 
   It’s important that you don’t simply make large claims like “Joe Smith
   MP has consistently voted strongly against increased government
@@ -106,21 +113,18 @@ field.
   can display things like “March 3rd: voted to exempt the Defence Ministry
   from the Access to Information law" 
 
-  Each Motion record must include an `id`, a `date` or `datetime`, and a
-  `result`.
+  These can either be a human-readable title for the motion, or an 'aye'
+  and 'nay' pairing to provide different text depending on which way a
+  vote was cast.
 
-  It must also either have a `title` or `text` **or** an `aye` or `nay`
-  description (these latter can also be obtained from a different source,
-  as long as they share the same `id`)
-
-5. People & Organisations 
+5. People & Organisations (optional)
 
   Depending what data is included in your Vote Event data you might need
   to cross-reference person IDs, or look up what political groups people
   were in at the time of a vote (which may not be the same as what one
   they’re in today, etc). 
 
-  Currently this is required to be in Popolo format.
+  This must be in [Popolo format](http://www.popoloproject.com/specs/person.html).
 
 ## Installation
 
