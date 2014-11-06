@@ -149,6 +149,12 @@ Or install it yourself as:
   stancer.all_stances(group_by: 'voter').each { |s| ... }
   ```
 
+The `group_by` option can be any field available on an individual vote
+record. This will usually be 'voter' (the parliamentarian / MP) or
+'group' (their political grouping/bloc/party). However you could also
+add other fields to your data source to group by here (e.g. geographical
+region, gender, age-bands, etc).
+
 ## Contributing
 
 Contributions are very welcome (against `master`, or as new feature
