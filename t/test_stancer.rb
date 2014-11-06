@@ -8,10 +8,10 @@ describe Stancer do
   subject { 
     Stancer.new(
       sources: {
-        votes:      't/data/votes.json',
         issues:     't/data/issues.json',
         indicators: 't/data/indicators.json',
         motions:    't/data/motions.json',
+        votes:      't/data/votes.json',
       }
     )
   }

@@ -8,7 +8,6 @@ describe 'MP grouping' do
   subject { 
     Stancer.new({
       sources: {
-        votes:      't/data/votes.json',
         issues:     't/data/issues.json',
         indicators: 't/data/indicators.json',
         motions:    't/data/motions.json',
@@ -29,7 +28,6 @@ describe 'Party grouping' do
   subject { 
     Stancer.new({
       sources: {
-        votes:      't/data/votes.json',
         issues:     't/data/issues.json',
         indicators: 't/data/indicators.json',
         motions:    't/data/motions.json',
@@ -50,7 +48,6 @@ describe 'exclusions' do
   subject { 
     Stancer.new({
       sources: {
-        votes:      't/data/votes.json',
         issues:     't/data/issues.json',
         indicators: 't/data/indicators.json',
         motions:    't/data/motions.json',

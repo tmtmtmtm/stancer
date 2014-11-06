@@ -15,7 +15,6 @@ describe Stancer do
     Stancer.new(
       sources: {
         issues:     'http://example.com/data/issues.json',
-        votes:      't/data/votes.json',
         indicators: 't/data/indicators.json',
         motions:    't/data/motions.json',
       }
