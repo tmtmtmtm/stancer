@@ -147,6 +147,11 @@ Or install it yourself as:
   })
 
   stancer.all_stances(group_by: 'voter').each { |s| ... }
+
+  stances = stancer.all_stances({
+    group_by: 'voter',
+    exclude:  'indicators',
+  })
   ```
 
 The `group_by` option can be any field available on an individual vote
@@ -154,6 +159,9 @@ record. This will usually be 'voter' (the parliamentarian / MP) or
 'group' (their political grouping/bloc/party). However you could also
 add other fields to your data source to group by here (e.g. geographical
 region, gender, age-bands, etc).
+
+The `exclude` option is a list of fields to delete from the final
+output.
 
 ## Contributing
 
