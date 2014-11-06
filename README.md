@@ -67,7 +67,8 @@ Note: Where the documentaion says something like "must contain `voter_id`", a
   present). 
 
   You can largely have whatever fields you like here, depending on how
-  you're going to display them. The only essential field is `id`.
+  you're going to display them. The only essential fields are `id` and
+  `indicators` (see below)
 
   Example: [t/data/issues.json](t/data/issues.json)
 
@@ -116,15 +117,6 @@ Note: Where the documentaion says something like "must contain `voter_id`", a
   These can either be a human-readable title for the motion, or an 'aye'
   and 'nay' pairing to provide different text depending on which way a
   vote was cast.
-
-5. People & Organisations (optional)
-
-  Depending what data is included in your Vote Event data you might need
-  to cross-reference person IDs, or look up what political groups people
-  were in at the time of a vote (which may not be the same as what one
-  they’re in today, etc). 
-
-  This must be in [Popolo format](http://www.popoloproject.com/specs/person.html).
 
 ## Installation
 
