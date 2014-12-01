@@ -31,8 +31,9 @@ class Stancer::Stance
 
   def score_votes!
     scored_votes = {}
-    @indicators.each do |a|
+    (@indicators || []).each do |a|
       a['motion']['vote_events'].each do |ve|
+        raise "No votes in #{ve}" unless ve.has_key?('votes')
         wanted_votes = @filter.nil? ? ve['votes'] : ve['votes'].find_all(&@filter) 
         wanted_votes.compact.group_by { |v|
           # Group by the first potential key that exists (e.g. mp or mp_id)

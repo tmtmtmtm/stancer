@@ -8,7 +8,7 @@ class Stancer
     @sources = h[:sources]
   end
 
-  def all_stances(opts)
+  def all_stances(opts={})
     group = opts[:group_by] or raise "No group_by"
     all_issues.map { |i| 
       i['stances'] = issue_stance(i, group).to_h
@@ -35,7 +35,7 @@ class Stancer
   end
 
   def issues_with_embedded_data
-    issues     = source_data(:issues) or raise "Need a source of isses"
+    issues     = source_data(:issues) or raise "Need a source of issues"
     indicators = source_data(:indicators) || []
     motions    = source_data(:motions) || []
     votes      = source_data(:votes) || []
