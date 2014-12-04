@@ -151,6 +151,7 @@ Or install it yourself as:
   stances = stancer.all_stances({
     group_by: 'voter',
     exclude:  'indicators',
+    format:   'hash',
   })
   ```
 
@@ -159,6 +160,11 @@ record. This will usually be 'voter' (the parliamentarian / MP) or
 'group' (their political grouping/bloc/party). However you could also
 add other fields to your data source to group by here (e.g. geographical
 region, gender, age-bands, etc).
+
+The `format` option allows you to specify how you would like the
+resulting data to be arranged. The only options at present are 'list',
+for an Array of Hashes, each containing a 'voter' field; or 'hash' for
+a Hash of Hashes, keyed by voter.
 
 The `exclude` option is a list of fields to delete from the final
 output.

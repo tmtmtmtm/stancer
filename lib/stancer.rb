@@ -11,7 +11,12 @@ class Stancer
   def all_stances(opts={})
     group = opts[:group_by] or raise "No group_by"
     all_issues.map { |i| 
-      i['stances'] = issue_stance(i, group).to_h
+      is = issue_stance(i, group)
+      if opts[:format] == 'hash'
+        i['stances'] = is.to_keyed_hash
+      else
+        i['stances'] = is.to_h
+      end
       [opts[:exclude]].flatten.each { |k| i.delete(k) }
       i
     }

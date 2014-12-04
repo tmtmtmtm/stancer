@@ -15,10 +15,27 @@ describe 'MP grouping' do
     })
   }
 
-  it "should score Issue 2 correctly" do
-    farming = subject.all_stances(group_by: 'voter').find { |s| s['id'] == 2 }['stances']
-    farming['barry_barnes'][:weight].must_equal 10.fdiv(15)
-    farming['pb'].must_be_nil 
+  let(:plain) { subject.all_stances(group_by: 'voter').find { |s| s['id'] == 2 }['stances'] }
+  let(:keyed) { subject.all_stances(group_by: 'voter', format: 'hash').find { |s| s['id'] == 2 }['stances'] }
+
+  it "should return individual records by default" do
+    plain.must_be_instance_of Array
+    plain.first.must_be_instance_of Hash
+  end
+
+  it "should have correct scores in individual records" do
+    barnes  = plain.find { |s| s[:voter] == 'barry_barnes' }
+    barnes[:weight].must_equal 10.fdiv(15)
+  end
+
+  it "should be possible to get a keyed hash" do
+    keyed.must_be_instance_of Hash
+    keyed.first.must_be_instance_of Array # Pair
+  end
+
+  it "should have correct scores in keyed records" do
+    barnes  = keyed['barry_barnes']
+    barnes[:weight].must_equal 10.fdiv(15)
   end
 
 end 
@@ -36,7 +53,7 @@ describe 'Party grouping' do
   }
 
   it "should score Issue 2 correctly" do
-    farming = subject.all_stances(group_by: 'group').find { |s| s['id'] == 2 }['stances']
+    farming = subject.all_stances(group_by: 'group', format: 'hash').find { |s| s['id'] == 2 }['stances']
     farming['barry_barnes'].must_be_nil 
     farming['pb'][:weight].must_equal 10.fdiv(15)
   end

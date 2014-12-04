@@ -8,8 +8,12 @@ class Stancer::Stance
     @filter = filter
   end
 
-  def to_h
+  def to_keyed_hash
     Hash[ scored_votes.map { |bloc, as| [ bloc, Stancer::Score.new(as).to_h ] } ]
+  end
+
+  def to_h
+    scored_votes.map { |bloc, as| { voter: bloc }.merge(Stancer::Score.new(as).to_h) }
   end
 
   private 
